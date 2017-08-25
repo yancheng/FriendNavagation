@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO: we will need to start a login activity here (create one with layout)
+                startActivity(new Intent(MainActivity.this,FNLoginActivity.class));
+
                 // TODO: in the login activity handler perform user login authentication
 
                 // TODO: do a similar thing for register btn for user registration
