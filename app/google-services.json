@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "117469092433",
+    "firebase_url": "https://friendnavigation-88e9c.firebaseio.com",
+    "project_id": "friendnavigation-88e9c",
+    "storage_bucket": "friendnavigation-88e9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117469092433:android:0fc7252c9a0fb798",
+        "android_client_info": {
+          "package_name": "com.yaosun.friendnavigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117469092433-1fhcsmjsgbjfa9bl9e6m4cop6lkodkvl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yaosun.friendnavigation",
+            "certificate_hash": "4fd0f884eb6a29ce17dbb44eeb648f8955d7afad"
+          }
+        },
+        {
+          "client_id": "117469092433-m5571gru49e78nv3p3snba6nuulap2v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-a-hAhEFC7z_Jj4ax-FDW3dVpq05hkU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117469092433-m5571gru49e78nv3p3snba6nuulap2v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

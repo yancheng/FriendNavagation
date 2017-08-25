@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FriendNavigation</string>
+    <string name="welcome1">Welcome to Friend Navigation!</string>
+    <string name="title_activity_fnfriend_list">FNFriendListActivity</string>
+</resources>
