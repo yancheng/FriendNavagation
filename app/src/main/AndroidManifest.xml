@@ -23,6 +23,10 @@
         <activity
             android:name=".FNLoginActivity"
             android:label="@string/title_activity_fnlogin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateNewUserActivity"
+            android:label="@string/title_activity_create_new_user"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -90,14 +90,14 @@ public class CreateNewUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String userEmailString, userPasswordString;
-                //userEmailString = mCreateEmailEditText.getText().toString().trim();
-                //userPasswordString = mCreatePasswordEditText.getText().toString().trim();
-                userEmailString = "testnow@gmail.com";
-                userPasswordString = "testaabbccdd";
-                Log.i("Yao", "position 0");
+                userEmailString = mCreateEmailEditText.getText().toString().trim();
+                userPasswordString = mCreatePasswordEditText.getText().toString().trim();
+                //userEmailString = "testnow@gmail.com";
+                //userPasswordString = "testaabbccdd";
+                // debug Log.i("Yao", "position 0");
                 if(!TextUtils.isEmpty(userEmailString) && !TextUtils.isEmpty(userPasswordString))
                 {
-                    Log.i("Yao", "position 1");
+                    // debug Log.i("Yao", "position 1");
 
                     mFirebaseAuth.createUserWithEmailAndPassword(userEmailString,userPasswordString).
                             addOnCompleteListener(CreateNewUserActivity.this,new OnCompleteListener<AuthResult>() {
@@ -105,18 +105,18 @@ public class CreateNewUserActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                       if(task.isSuccessful()){
                                           Log.i("Yao", "position 2");
-                                          /*DatabaseReference mNewUser = mDatabaseRef.child("Users").push();
+                                          DatabaseReference mNewUser = mDatabaseRef.child("Users").push();
                                           String newUserKey = mNewUser.getKey();
 
                                           mNewUser.child("userKey").setValue(newUserKey);
                                           mNewUser.child("emailAddr").setValue(userEmailString);
-                                          mNewUser.child("passwordForLogin").setValue(userPasswordString);*/
+                                          mNewUser.child("passwordForLogin").setValue(userPasswordString);
 
                                           Toast.makeText(CreateNewUserActivity.this, "Successfully created account", Toast.LENGTH_LONG).show();
                                             // move to login activity
                                           startActivity(new Intent(CreateNewUserActivity.this,FNLoginActivity.class));
                                       }else{
-                                          Log.i("Yao", "position 3");
+                                          // debug Log.i("Yao", "position 3");
                                           Toast.makeText(CreateNewUserActivity.this, "Failed to create account", Toast.LENGTH_LONG).show();
                                       }
                                 }
@@ -125,7 +125,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                     );
                 }
                 else{
-                    Log.i("Yao", "position r");
+                    // debug Log.i("Yao", "position r");
                     Toast.makeText(CreateNewUserActivity.this, "empty user name or password", Toast.LENGTH_LONG).show();
                 }
 

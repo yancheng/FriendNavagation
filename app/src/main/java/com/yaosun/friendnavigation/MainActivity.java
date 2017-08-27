@@ -14,8 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private FirebaseAuth mFirebaseAuth;
-    private FirebaseDatabase mFirebaseDatabase;
+    //private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Button mLoginBtn, mRegisterBtn;
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                // TODO: we will need to start a login activity here (create one with layout)
+                // Completed. we will need to start a login activity here (create one with layout)
                 startActivity(new Intent(MainActivity.this,FNLoginActivity.class));
 
                 // TODO: in the login activity handler perform user login authentication
@@ -59,6 +60,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mRegisterBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // TODO: create a new activity for new user creation, create new user there
+                startActivity(new Intent(MainActivity.this,CreateNewUserActivity.class));
+            }
+        });
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFirebaseAuth.removeAuthStateListener(mAuthListener);
     }
 }

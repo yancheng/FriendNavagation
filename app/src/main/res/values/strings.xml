@@ -3,4 +3,6 @@
     <string name="welcome1">Welcome to Friend Navigation!</string>
     <string name="title_activity_fnfriend_list">FNFriendListActivity</string>
     <string name="title_activity_fnlogin">FNLoginActivity</string>
+    <string name="title_activity_create_new_user">CreateNewUserActivity</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
