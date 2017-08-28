@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "117469092433-i4re9mcj98i15op5g6ucrk701gakuj3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yaosun.friendnavigation",
+            "certificate_hash": "58668499eb9531db1bd06f7018bea8b0ad21197f"
+          }
+        },
+        {
           "client_id": "117469092433-1fhcsmjsgbjfa9bl9e6m4cop6lkodkvl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
