@@ -21,8 +21,23 @@ public class UserModel {
         this.userKey = userKey;
     }
 
-    public String getUserEmail()
+    public UserModel(){
+        this("","","");
+    }
+
+    public String getEmailAddr()
     {
         return this.emailAddr;
     }
+
+    public void setEmailAddr(String email){this.emailAddr = email;}
+
+    public String getPasswordForLogin(){return this.passwordForLogin;}
+
+    public void setPasswordForLogin(String password){this.passwordForLogin = password;}
+
+    public String getUserKey(){return this.getUserKey();}
+
+    public void setUserKey(String key){this.userKey = key;}
+
 }

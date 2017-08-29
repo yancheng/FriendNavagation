@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -72,17 +73,51 @@ public class FNFriendListActivity extends AppCompatActivity {
         // this is temporary for testing recycler view
         // eventually we will be displayingFriendList
         RecyclerView friendList = (RecyclerView)findViewById(R.id.friend_list_view);
+
+        friendList.setLayoutManager(new LinearLayoutManager(this));
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        mDatabaseUserRef = mFirebaseDatabase.getReference().child("Users");
+
+        mAdapter = new FirebaseRecyclerAdapter<UserModel,friendItemViewHolder>(
+                UserModel.class,
+                R.layout.recyclerview_friendlist_row,
+                friendItemViewHolder.class,
+                mDatabaseUserRef) {
+            @Override
+            protected void populateViewHolder(friendItemViewHolder holder, UserModel user, int position) {
+                holder.setEmailAddr(user.getEmailAddr().replace(".",","));
+                holder.setListItemNumber(Integer.toString(position));
+            }
+        };
+
+        friendList.setAdapter(mAdapter);
 
     }
 
-    public class friendItemViewHolder extends RecyclerView.ViewHolder{
-        TextView listItemNumberView;
-        TextView friendNameView;
+    public static class friendItemViewHolder extends RecyclerView.ViewHolder{
+        private TextView mListItemNumberView;
+        private TextView mFriendNameView;
         public friendItemViewHolder(View itemView) {
             super(itemView);
-            listItemNumberView = (TextView)itemView.findViewById(R.id.friend_index);
-            friendNameView = (TextView)itemView.findViewById(R.id.friend_email_addr);
+            mListItemNumberView = (TextView)itemView.findViewById(R.id.friend_index);
+            mFriendNameView = (TextView)itemView.findViewById(R.id.friend_email_addr);
         }
+
+        public void setEmailAddr(String emailAddr)
+        {
+            mFriendNameView.setText(emailAddr);
+        }
+
+        public void setListItemNumber(String listItemNumber)
+        {
+            mListItemNumberView.setText(listItemNumber);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
     }
 }
