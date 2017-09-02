@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
+import com.yaosun.friendnavigation.Models.FNUtil;
 
 public class CreateNewUserActivity extends AppCompatActivity {
 
@@ -105,10 +106,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                       if(task.isSuccessful()){
                                           Log.i("Yao", "position 2");
-                                          DatabaseReference mNewUser = mDatabaseRef.child("Users").push();
-                                          String newUserKey = mNewUser.getKey();
+                                          // remove .push
+                                          DatabaseReference mNewUser = mDatabaseRef.child("Users").child(FNUtil.encodeEmail(userEmailString));
+                                          //String newUserKey = mNewUser.getKey();
 
-                                          mNewUser.child("userKey").setValue(newUserKey);
+                                          //mNewUser.child("userKey").setValue(newUserKey);
                                           mNewUser.child("emailAddr").setValue(userEmailString);
                                           mNewUser.child("passwordForLogin").setValue(userPasswordString);
 
