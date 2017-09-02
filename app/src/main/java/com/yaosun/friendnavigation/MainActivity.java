@@ -12,6 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+// TODO: modify the icon image
+// TODO: watch the remaining part of the udacity class for publishing app
+
 public class MainActivity extends AppCompatActivity {
 
 

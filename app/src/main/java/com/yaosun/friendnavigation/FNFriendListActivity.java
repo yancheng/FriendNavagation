@@ -91,7 +91,11 @@ public class FNFriendListActivity extends AppCompatActivity {
             }
         };
 
-        friendList.setAdapter(mAdapter);
+        friendList.setAdapter(mAdapter);*/
+
+    }
+    // TODO: add auto completion functionality when adding friends
+    public void searchAndAddNewFriend(View view){
 
     }
 
