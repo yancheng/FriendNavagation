@@ -19,7 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.yaosun.friendnavigation.UserModel;
+import com.yaosun.friendnavigation.Models.UserModel;
 
 public class FNFriendListActivity extends AppCompatActivity {
 
