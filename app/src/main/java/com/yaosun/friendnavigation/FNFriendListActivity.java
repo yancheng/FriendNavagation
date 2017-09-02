@@ -72,7 +72,7 @@ public class FNFriendListActivity extends AppCompatActivity {
 
         // this is temporary for testing recycler view
         // eventually we will be displayingFriendList
-        RecyclerView friendList = (RecyclerView)findViewById(R.id.friend_list_view);
+        /*RecyclerView friendList = (RecyclerView)findViewById(R.id.friend_list_view);
 
         friendList.setLayoutManager(new LinearLayoutManager(this));
         mFirebaseDatabase = FirebaseDatabase.getInstance();
