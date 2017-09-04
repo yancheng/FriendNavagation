@@ -111,6 +111,8 @@ public class FNFriendListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(FNFriendListActivity.this,"you clicked on item "+ Integer.toString(position), Toast.LENGTH_LONG).show();
+                        // TODO: create a basic chat entry and start the chat activity; 'fore creating it, first check whether the other party created it
+                        // if so, capture the chat-id and use the same chat
                     }
                 });
             }
