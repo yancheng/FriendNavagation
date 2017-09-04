@@ -5,4 +5,5 @@
     <string name="title_activity_fnlogin">FNLoginActivity</string>
     <string name="title_activity_create_new_user">CreateNewUserActivity</string>
     <string name="sign_out">Sign Out</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>
