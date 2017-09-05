@@ -102,7 +102,7 @@ public class FNFriendListActivity extends AppCompatActivity {
                 friendItemViewHolder.class,
                 mDatabaseFriendMapRef) {
             @Override
-            protected void populateViewHolder(friendItemViewHolder holder, FriendModel friend, final int position) {
+            protected void populateViewHolder(friendItemViewHolder holder, final FriendModel friend, final int position) {
                 Log.i("positionA","psition is" + position +", friend email is " + friend.getFriendEmailAddr());
                 holder.setEmailAddr(friend.getFriendEmailAddr());
                 holder.setListItemNumber(Integer.toString(position));
@@ -113,6 +113,10 @@ public class FNFriendListActivity extends AppCompatActivity {
                         Toast.makeText(FNFriendListActivity.this,"you clicked on item "+ Integer.toString(position), Toast.LENGTH_LONG).show();
                         // TODO: create a basic chat entry and start the chat activity; 'fore creating it, first check whether the other party created it
                         // if so, capture the chat-id and use the same chat
+                        Intent intent = new Intent(view.getContext(),ChatActivity.class);
+                        // TODO: make a constant for string "friendEmailAddr"
+                        intent.putExtra("friendEmailAddr",friend.getFriendEmailAddr());
+                        startActivity(intent);
                     }
                 });
             }

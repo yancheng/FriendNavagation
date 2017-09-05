@@ -39,7 +39,7 @@
             android:layout_height="30dp"
             android:layout_marginRight="15dp"
             android:onClick="searchAndAddNewFriend"
-            android:background="@drawable/com_facebook_button_send_icon_blue" />
+            android:background="@android:drawable/ic_menu_send" />
 
     </LinearLayout>
 
