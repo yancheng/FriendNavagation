@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.yaosun.friendnavigation.Models.BasicChatModel;
+import com.yaosun.friendnavigation.Models.MessageModel;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -24,7 +26,13 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
 
     private DatabaseReference mBasicChatDatabaseRef;
+
+    private FirebaseListAdapter<MessageModel> mMessageListAdapter;
+
+    // mSearchChatIdResult might have some duplication with mChatId, TODO: revisit and combine
     private String mSearchChatIdResult;
+
+
 
     private String mChatId;
     @Override

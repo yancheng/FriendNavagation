@@ -1,4 +1,4 @@
-package com.yaosun.friendnavigation.Models;
+package com.yaosun.friendnavigation.Utils;
 
 /**
  * Created by yaohuasun on 9/1/17.
