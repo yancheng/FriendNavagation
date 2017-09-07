@@ -1,6 +1,7 @@
 package com.yaosun.friendnavigation.Models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class BasicChatModel {
 
     private String User1EmailAddr;
     private String User2EmailAddr;
-    private List<String> MessageIds;
+    private HashMap<String,Object> MessageIds;
     private String ChatId;
 
     public BasicChatModel()
@@ -23,7 +24,7 @@ public class BasicChatModel {
 
     }
 
-    public BasicChatModel(String user1EmailAddr, String user2EmailAddr, List<String> messageIds, String chatId)
+    public BasicChatModel(String user1EmailAddr, String user2EmailAddr, HashMap<String,Object> messageIds, String chatId)
     {
         this.User1EmailAddr = user1EmailAddr;
         this.User2EmailAddr = user2EmailAddr;
@@ -42,7 +43,7 @@ public class BasicChatModel {
         this.User2EmailAddr = email;
     }
 
-    public void setMessageIds (List<String> messageIds)
+    public void setMessageIds (HashMap<String,Object> messageIds)
     {
         this.MessageIds = messageIds;
     }
@@ -59,7 +60,7 @@ public class BasicChatModel {
         return this.User2EmailAddr;
     }
 
-    public List<String> getMessageIds(){
+    public HashMap<String,Object> getMessageIds(){
         return this.MessageIds;
     }
 

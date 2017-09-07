@@ -1,5 +1,7 @@
 package com.yaosun.friendnavigation.Models;
 
+import android.util.Log;
+
 /**
  * Created by yaohuasun on 9/5/17.
  */
@@ -9,11 +11,12 @@ public class MessageModel {
     private String Message;
     private String Timestamp;
     public MessageModel(){
-
+        Log.i("place 01", "why ending up here?");
     }
 
     //Constructor for plain text message
     public MessageModel(String sender, String message, String time) {
+        Log.i("place 02", "message is "+ message);
         this.SenderEmail = sender;
         this.Message = message;
         this.Timestamp = time;
@@ -29,6 +32,10 @@ public class MessageModel {
     public String getMessage() {
         return this.Message;
     }
+
+    public void setSenderEmail(String email) {this.SenderEmail = email;}
+    public void setMessage(String message){this.Message = message;}
+    public void setTimestamp(String time){this.Timestamp=time;}
 }
 
 
