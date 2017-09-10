@@ -3,6 +3,7 @@ package com.yaosun.friendnavigation.Models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by yaohuasun on 9/4/17.
@@ -18,6 +19,7 @@ public class BasicChatModel {
     private String User2EmailAddr;
     private HashMap<String,Object> MessageIds;
     private String ChatId;
+    private HashMap<String,Object> MeetRequest;
 
     public BasicChatModel()
     {
@@ -47,10 +49,15 @@ public class BasicChatModel {
     {
         this.MessageIds = messageIds;
     }
+
     public  void setChatId (String chatId)
     {
         this.ChatId = chatId;
     }
+
+    public void setMeetRequest(HashMap<String,Object> meetRequest){this.MeetRequest = meetRequest;}
+
+
 
     public String getUser1EmailAddr(){
         return this.User1EmailAddr;
@@ -67,5 +74,7 @@ public class BasicChatModel {
     public String getChatId(){
         return this.ChatId;
     }
+
+    public HashMap<String,Object> getMeetRequest(){return this.MeetRequest;}
 
 }

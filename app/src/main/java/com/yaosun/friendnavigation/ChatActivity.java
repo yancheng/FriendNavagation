@@ -47,6 +47,8 @@ public class ChatActivity extends AppCompatActivity {
     // for example root/BasicChat/ChatId/MessageIds
     private DatabaseReference mMessageDataBaseReference;
 
+    private DatabaseReference mMeetRequestMessageRef;
+
     private ListView mMessageList;
 
     private FirebaseListAdapter<MessageModel> mMessageListAdapter;
@@ -180,7 +182,7 @@ public class ChatActivity extends AppCompatActivity {
             mChatId = mSearchChatIdResult;
         }*/
             Intent intent = this.getIntent();
-            final String mChatId = FNUtil.generateIDWithTwoEmails(mCurrentUserEmail, intent.getStringExtra("friendEmailAddr"));
+            mChatId = FNUtil.generateIDWithTwoEmails(mCurrentUserEmail, intent.getStringExtra("friendEmailAddr"));
 
             mBasicChatDatabaseRef.orderByChild("User2EmailAddr").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -199,10 +201,14 @@ public class ChatActivity extends AppCompatActivity {
             });
 
         if (null == mSearchChatIdResult) {
-            // we didn't find it, we create a chat
+            // we didn't find it, we create a chat; TODO: use constants to replace child names here
             mBasicChatDatabaseRef.child(mChatId).child("User1EmailAddr").setValue(mCurrentUserEmail);
             mBasicChatDatabaseRef.child(mChatId).child("User2EmailAddr").setValue(basicChatFriend);
             mBasicChatDatabaseRef.child(mChatId).child("chatId").setValue(mChatId);
+
+            mBasicChatDatabaseRef.child(mChatId).child("meetRequest").child("party1Agreed").setValue("false");
+            mBasicChatDatabaseRef.child(mChatId).child("meetRequest").child("party2Agreed").setValue("false");
+
         }
             mMessageDataBaseReference = mBasicChatDatabaseRef.child(mChatId).child(Constants.BASIC_CHAT_MESSAGE_IDS);
             // TODO:high, create a message adapter attaching to the listview; after done, create showMessages() to display
@@ -315,6 +321,27 @@ public class ChatActivity extends AppCompatActivity {
                         mMessageField.setText("");
                     }
                 });
+
+    }
+
+    public void proposeToStartNavigation(View view){
+        mMeetRequestMessageRef = mBasicChatDatabaseRef.child(mChatId).child("meetRequest");
+        if ((mMeetRequestMessageRef.child("party1Agreed").toString().equals("false")) &&
+        (mMeetRequestMessageRef.child("party2Agreed").toString().equals("false")))
+        {
+            //mBasicChatDatabaseRef.child(mChatId).child("User1EmailAddr").setValue(mCurrentUserEmail);
+            //mBasicChatDatabaseRef.child(mChatId).child("User2EmailAddr").setValue(basicChatFriend);
+
+            if (FNUtil.isInputEmailGreaterThanTheOther(mCurrentUserEmail,basicChatFriend)){
+                // the email that is "greater" will be party1
+                mMeetRequestMessageRef.child("party1Agreed").setValue("true");
+            }else {
+                mMeetRequestMessageRef.child("party1Agreed").setValue("true");
+            }
+
+            // TODO, high, display a system style message that says mCurrentUserEmail sent a Nav Request to basicChatFriend
+        }
+        // if either party already Agreed, we do nothing; will let remaining party click hidden(now shown) picture button to make both true and start map activity
 
     }
 

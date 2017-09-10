@@ -27,4 +27,10 @@ public class FNUtil {
 
         return returnValue;
     }
+
+    static public boolean isInputEmailGreaterThanTheOther (String email1, String email2){
+        boolean returnValue = false;
+        returnValue = (email1.compareTo(email2) > 0);
+        return returnValue;
+    }
 }
