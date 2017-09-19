@@ -33,16 +33,16 @@
             android:visibility="gone"
             android:layout_height="100dp" />
 
-        <!--<ImageButton
+        <ImageButton
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:id="@+id/voiceMessageButton"
+            android:id="@+id/startNavigationButton"
             android:visibility="gone"
-            android:background="@mipmap/ic_play_audio"/>-->
+            android:background="@mipmap/ic_play_audio"/>
 
         <TextView
             android:id="@+id/messageTextView"

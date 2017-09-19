@@ -26,13 +26,14 @@ public class BasicChatModel {
 
     }
 
-    public BasicChatModel(String user1EmailAddr, String user2EmailAddr, HashMap<String,Object> messageIds, String chatId)
+    public BasicChatModel(String user1EmailAddr, String user2EmailAddr, HashMap<String,Object> messageIds, String chatId, HashMap<String,Object>meetRequest)
     {
         this.User1EmailAddr = user1EmailAddr;
         this.User2EmailAddr = user2EmailAddr;
         // TODO: remove the messageIds field, they could be found from the chatIds
         this.MessageIds = messageIds;
         this.ChatId = chatId;
+        this.MeetRequest = meetRequest;
     }
 
     public void setUser1EmailAddr(String email)

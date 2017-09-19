@@ -7,4 +7,12 @@
     <string name="sign_out">Sign Out</string>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="title_activity_request">requestActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="starting_nav">STARTING\nNAVIGATION\n...</string>
+    <string name="hangout_button">Hangout</string>
+    <string name="accept_button">Accept</string>
+    <string name="nav_context">Start Navigation to Meet Friend</string>
 </resources>

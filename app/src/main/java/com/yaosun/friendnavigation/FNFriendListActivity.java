@@ -114,6 +114,8 @@ public class FNFriendListActivity extends AppCompatActivity {
                         Intent intent = new Intent(view.getContext(),ChatActivity.class);
                         // TODO: make a constant for string "friendEmailAddr"
                         intent.putExtra("friendEmailAddr",friend.getFriendEmailAddr());
+                        // TODO: find a potentially better way (from calling intent) to figure out calling activity
+                        //intent.putExtra("callingActivity", "friendListActivity");
                         startActivity(intent);
                     }
                 });

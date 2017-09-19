@@ -52,13 +52,13 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@android:drawable/ic_menu_gallery" />-->
-
             <ImageButton
-                android:id="@+id/proposeNavgationButton"
+                android:id="@+id/proposeToStartNavButton"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@android:drawable/ic_menu_mapmode"
-                android:onClick="proposeToStartNavigation" />
+                android:onClick="proposeNavigation"
+                android:contentDescription="@string/nav_context" />
             <EditText
                 android:id="@+id/messageToSend"
                 android:layout_width="0dp"
