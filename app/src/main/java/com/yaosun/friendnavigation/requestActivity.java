@@ -11,11 +11,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yaosun.friendnavigation.Models.MeetRequestModel;
 import com.yaosun.friendnavigation.Utils.FNUtil;
 
 /**
@@ -96,9 +98,13 @@ public class requestActivity extends AppCompatActivity {
     private DatabaseReference mBasicChatRef;
     private DatabaseReference mMeetRequestReference;
 
+    private ValueEventListener mMeetRequestRefListener;
+
     private String mChatId;
 
     private String mIsCallingActivityInitiator;
+
+    private String mCurrentUserEmail;
 
     private Button mAcceptBtn;
     private Button mHanghoutBtn;
@@ -106,6 +112,8 @@ public class requestActivity extends AppCompatActivity {
     private String mFriendEmailAddr;
 
     private View mContentView;
+
+    private MeetRequestModel mCurrentMeetRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,12 +142,19 @@ public class requestActivity extends AppCompatActivity {
         mMeetRequestReference = mBasicChatRef.child("meetRequest");
         mAcceptBtn = (Button)findViewById(R.id.accept_button);
 
+        mCurrentMeetRequest = new MeetRequestModel();
+        mMeetRequestRefListener = null;
+
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mCurrentUserEmail = mFirebaseAuth.getCurrentUser().getEmail().trim();
+
         if(mIsCallingActivityInitiator.equals("true")){
             // the caller doesn't need the accept bubton
             mAcceptBtn.setVisibility(View.INVISIBLE);
             // mFriendEmailAddr = mMeetRequestReference.child("responderEmailAddr").toString();
 
-            mMeetRequestReference.child("responderEmailAddr").addListenerForSingleValueEvent(new ValueEventListener() {
+           /* mMeetRequestReference.child("responderEmailAddr").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Log.i("requestAct00a"," dataSnapshot is "+ dataSnapshot.toString());
@@ -150,7 +165,10 @@ public class requestActivity extends AppCompatActivity {
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+            });*/
+
+
+
         }
         else
         {
@@ -172,7 +190,7 @@ public class requestActivity extends AppCompatActivity {
                 }
             });
             //mFriendEmailAddr = mMeetRequestReference.child("initiatorEmailAddr").toString();
-            mMeetRequestReference.child("initiatorEmailAddr").addListenerForSingleValueEvent(new ValueEventListener() {
+            /*mMeetRequestReference.child("initiatorEmailAddr").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Log.i("requestAct00b"," dataSnapshot is "+ dataSnapshot.toString());
@@ -183,8 +201,87 @@ public class requestActivity extends AppCompatActivity {
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
-            });
+            });*/
         }
+
+        // attach value event listener to the meetrequest reference
+        mMeetRequestRefListener = mMeetRequestReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.i("position09191", "in reqActivity, dataSnapShot is " + dataSnapshot.toString());
+
+                mCurrentMeetRequest = dataSnapshot.getValue(MeetRequestModel.class);
+                String initiatorEmail = mCurrentMeetRequest.getInitiatorEmailAddr();
+                String initiatorState = mCurrentMeetRequest.getInitiatorState();
+                String responderEmail = mCurrentMeetRequest.getResponderEmailaddr();
+                String responderState = mCurrentMeetRequest.getResponderState();
+                if(mIsCallingActivityInitiator.equals("true"))
+                {
+                    // if calling activity is initiator
+                    mFriendEmailAddr = responderEmail;
+
+                    if (!mCurrentUserEmail.equals(initiatorEmail))
+                    {
+                        Log.i("DEAD1", "unExpected situation,wrong, mCurrentUserEmail is " + mCurrentUserEmail +", responder email is"+ responderEmail);
+                    }
+
+
+
+                    // if responder accepts ( responderState = true), make sure the initiator email, state is correct,
+                    // start map activity; detach listener; finish current activity
+                    if (responderState.equals("true")){
+                        if (!initiatorState.equals("true")){
+                            Log.i("DEAD11", "unExpected situation,wrong, initiatorEmail is" + initiatorEmail + "initiatorState is"+initiatorState);
+                        }
+
+                        Intent intent = new Intent(requestActivity.this,MapsActivity.class);
+                        intent.putExtra("ChatId",mChatId);
+                        intent.putExtra("isInitiator",mIsCallingActivityInitiator);
+                        // and start the MapsActivity
+                        startActivity(intent);
+
+
+
+                        finish();
+
+
+                    }else
+                    {
+                        // if responder declines (responder state = false), check the other states are expected (all null or false)
+                        // start chatactivity, detach listener; finish current activity
+                        if(!initiatorState.equals("false")){
+                            Log.i("DEAD12", "unExpected situation,wrong, initiatorEmail is" + initiatorEmail + "initiatorState is"+initiatorState);
+                        }
+
+                        Intent intent = new Intent(requestActivity.this,ChatActivity.class);
+                        // TODO: make a constant for string "friendEmailAddr"
+                        intent.putExtra("friendEmailAddr",responderEmail);
+                        // TODO: find a potentially better way (from calling intent) to figure out calling activity
+                        //intent.putExtra("callingActivity", "friendListActivity");
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    // clearly "detach listener; finish current activity" is common part, could do it in common area TODO: do it
+                }
+                else
+                {
+                    // calling activity is the responder chat activity
+                    mFriendEmailAddr = initiatorEmail;
+                    if (!mCurrentUserEmail.equals(responderEmail))
+                    {
+                        Log.i("DEAD2", "unExpected situation,wrong, mCurrentUserEmail is " + mCurrentUserEmail +", responder email is"+ responderEmail);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         mHanghoutBtn = (Button)findViewById(R.id.hangout_button);
         mHanghoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -287,4 +384,25 @@ public class requestActivity extends AppCompatActivity {
      mHideHandler.removeCallbacks(mHideRunnable);
      mHideHandler.postDelayed(mHideRunnable, delayMillis);
      }*/
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (null!= mMeetRequestRefListener)
+        {
+            mMeetRequestReference.removeEventListener(mMeetRequestRefListener);
+            mMeetRequestRefListener = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null!= mMeetRequestRefListener)
+        {
+            mMeetRequestReference.removeEventListener(mMeetRequestRefListener);
+            mMeetRequestRefListener = null;
+        }
+    }
 }
