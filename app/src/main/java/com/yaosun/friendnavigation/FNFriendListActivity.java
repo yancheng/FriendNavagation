@@ -1,6 +1,8 @@
 package com.yaosun.friendnavigation;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -113,7 +115,12 @@ public class FNFriendListActivity extends AppCompatActivity {
                         // if so, capture the chat-id and use the same chat
                         Intent intent = new Intent(view.getContext(),ChatActivity.class);
                         // TODO: make a constant for string "friendEmailAddr"
-                        intent.putExtra("friendEmailAddr",friend.getFriendEmailAddr());
+                        //intent.putExtra("friendEmailAddr",friend.getFriendEmailAddr());
+
+                        SharedPreferences friendPref = getSharedPreferences("friendEmailAddr",MODE_PRIVATE);
+                        SharedPreferences.Editor friendPrefEdit = friendPref.edit();
+
+                        friendPrefEdit.putString("friendEmailAddr",friend.getFriendEmailAddr());
                         // TODO: find a potentially better way (from calling intent) to figure out calling activity
                         //intent.putExtra("callingActivity", "friendListActivity");
                         startActivity(intent);

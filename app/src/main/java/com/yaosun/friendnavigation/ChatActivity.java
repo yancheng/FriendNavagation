@@ -2,6 +2,7 @@ package com.yaosun.friendnavigation;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -102,7 +103,17 @@ public class ChatActivity extends AppCompatActivity {
         //mNavigationRefListener = null;
 
         Intent intent = this.getIntent();
-        basicChatFriend = intent.getStringExtra("friendEmailAddr");
+
+        //instead of getting the basicchatfriend from extra, we will get it from shared preferences
+
+
+
+        //basicChatFriend = intent.getStringExtra("friendEmailAddr");
+
+        SharedPreferences friendPref = getSharedPreferences("friendEmailAddr",MODE_PRIVATE);
+        basicChatFriend = friendPref.getString("friendEmailAddr","defaultValue");
+
+
         mChatId = FNUtil.generateIDWithTwoEmails(mCurrentUserEmail, basicChatFriend );
 
         mBasicChatDatabaseRef.orderByChild("User2EmailAddr").addValueEventListener(new ValueEventListener() {
